@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+    <title>Set app role</title>
+    <style>
+        body {
+            overflow: auto;
+            margin: 0;
+            padding: 5px;
+            background: white;
+        }
+
+        button.role {
+            display: block;
+            border: 1px solid #CCC;
+            margin-bottom: 5px;
+            width: 100%;
+            background: #FFF;
+        }
+
+        hr {
+
+        }
+
+        textarea {
+            width: 200px;
+            height: 100px;
+        }
+
+        .app-id {
+            width: 100px;
+        }
+
+        .app-secret {
+            width: 70px;
+        }
+
+        .aAlert {
+            display: none;
+            background: #fff0e9;
+            border: 1px solid #F00;
+            padding: 10px 12px;
+            color: #F00;
+            margin-bottom: 5px;
+        }
+    </style>
+    <script src="tools.js"></script>
+    <script src="crypto-js.js"></script>
+    <script src="popup.js"></script>
+</head>
+<body>
+<div class="aAlert" id="aAlert"></div>
+<button class="role" id="4">As admin</button>
+<button class="role" id="3">As editor</button>
+<button class="role" id="2">As moderator</button>
+<button class="role" id="1">As member</button>
+<button class="role" id="0">As other</button>
+<hr>
+<div class="app-settings">
+    <table>
+        <thead>
+        <tr>
+            <th>App id</th>
+            <th>secret key</th>
+        </tr>
+        </thead>
+        <tbody id="config"></tbody>
+    </table>
+</div>
+</body>
+</html>
