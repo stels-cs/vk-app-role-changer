@@ -37,6 +37,14 @@ function makeStringAdmin(url, roleId, config) {
     if (u.searchParams.has('vk_user_id')) {
         if (roleId === 4) {
             u.searchParams.set("vk_viewer_group_role", "admin")
+        } else if (roleId === 3) {
+            u.searchParams.set("vk_viewer_group_role", "editor")
+        } else if (roleId === 2) {
+            u.searchParams.set("vk_viewer_group_role", "moder")
+        } else if (roleId === 1) {
+            u.searchParams.set("vk_viewer_group_role", "member")
+        } else if (roleId === 0) {
+            u.searchParams.set("vk_viewer_group_role", "none")
         } else {
             aAlert("Not created role id! "+roleId)
         }
