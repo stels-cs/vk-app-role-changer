@@ -24,15 +24,15 @@
 
 5 – Navigate to the directory in which your extension files live, and select it.
 
-![Install](_help/install.jpg)
+![Install](help/install.jpg)
 
 Как пользоваться
 ----------------
 
 1 – добавить id приложения и его секретный ключ в расширение
 
-![Config](_help/config.jpg)
+![Config](help/config.jpg)
 
 2 – на странице с открытым приложением выбоать роль которая вам нужна
 
-![Use](_help/use.jpg)
+![Use](help/use.jpg)
