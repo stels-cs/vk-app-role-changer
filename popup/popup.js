@@ -34,6 +34,53 @@ function click(e, config) {
 
 function makeStringAdmin(url, roleId, config) {
     let u = new URL(url)
+    if (u.searchParams.has('vk_user_id')) {
+        if (roleId === 4) {
+            u.searchParams.set("vk_viewer_group_role", "admin")
+        } else {
+            aAlert("Not created role id! "+roleId)
+        }
+
+        let parsedParams = {}
+
+        for (let key of u.searchParams.keys()) {
+            parsedParams[key] = decodeURIComponent( u.searchParams.get(key) )
+        }
+
+        if (parsedParams.vk_access_token_settings)
+            parsedParams.vk_access_token_settings = encodeURIComponent(parsedParams.vk_access_token_settings);
+
+        let stringForSign = '';
+        const signParamsKeys = [];
+
+        for (let key in parsedParams) {
+            if (!~key.indexOf('vk_'))
+                continue;
+
+            signParamsKeys.push(key)
+        }
+
+        signParamsKeys.sort().forEach((key, index) => {
+            if (index > 0) stringForSign += '&';
+
+            stringForSign += `${key}=${parsedParams[key]}`
+        });
+
+        let appId = parseInt(u.searchParams.get('vk_app_id'))
+        let cfg = config.filter( x => parseInt(x.id, 10) === appId ).pop()
+        let secret = null
+        if (!cfg) {
+            aAlert("Secret for appId "+appId+" not found")
+            return url
+        } else {
+            secret = cfg.secret
+        }
+
+        const sign = CryptoJS.HmacSHA256(stringForSign, secret);
+        const hashInBase64 = CryptoJS.enc.Base64.stringify(sign);
+        u.searchParams.set("sign", (hashInBase64).replace('/+g=', '_-g').replace('=','').replace('=','').replace('=','').replace('=','').replace('=','').replace('/','_').replace('/','_').replace('/','_').replace('/','_').replace('/','_').replace('+','-').replace('+','-').replace('+','-').replace('+','-'))
+        return u.href
+    }
     u.searchParams.set("viewer_type", roleId)
     let appId = parseInt(u.searchParams.get('api_id'))
     let sign = ''
